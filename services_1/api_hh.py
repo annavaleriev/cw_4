@@ -15,7 +15,7 @@ class HeadHunterAPI(API):
         self.count = count
         # self.page = page
 
-    def get_vacancy(self):
+    def get_vacancies(self):
         list_vacancy = []
         params = {
             "text": self.keyword,

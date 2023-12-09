@@ -15,7 +15,7 @@ class SuperJobAPI(API):
         self.count = count
         # self.page = page
 
-    def get_vacancy(self):
+    def get_vacancies(self):
         list_vacancy = []
         headers = {"X-Api-App-Id": SJ_API_KEY}  # method_name
         params = {

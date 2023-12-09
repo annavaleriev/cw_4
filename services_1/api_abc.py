@@ -7,7 +7,7 @@ class API(ABC):
     """
 
     @abstractmethod
-    def get_vacancy(self):
+    def get_vacancies(self):
         """
         Абстрактный метод для получения вакансий по API
         :return:
