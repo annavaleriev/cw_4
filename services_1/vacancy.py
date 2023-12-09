@@ -19,6 +19,16 @@ class Vacancy:
     def salary(self):
         pass  # тут как-то надо одну зп посчитать
 
+    def get_vacancies_by_salary(self):
+        pass
+    # json_saver.get_vacancies_by_salary("100 000-150 000 руб.")
+    # такой вывод
+
+    def delete_vacancy(self):
+        pass
+    # json_saver.delete_vacancy(vacancy)
+    #  у меня есть ещё методы в  class API
+
     def __gt__(self, other):  # True False наверное возвращает
         """
         Метод, который сравнивает заработные платы какая больше

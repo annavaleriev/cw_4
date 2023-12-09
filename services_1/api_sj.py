@@ -13,7 +13,7 @@ class SuperJobAPI(API):
         self.url = URL_SJ
         self.keyword = keyword
         self.count = count
-        # self.page = page
+        # self.page = page #'это вроде вообще не нужно, зачем страница
 
     def get_vacancies(self):
         list_vacancy = []
@@ -33,6 +33,9 @@ class SuperJobAPI(API):
             experience = information.get["candidat"]  # требования
             description = information.get["work"]  # описание вакансии
             url = information.get["link"]
+            # area = # проверить, там какая-то фигня с городом, цифры какие-то
+            # employment =
+            # currency = # что делать если не рубли
 
             vacancy = {
                 "name": name,

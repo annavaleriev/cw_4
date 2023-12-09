@@ -13,7 +13,7 @@ class HeadHunterAPI(API):
         self.url = URL_HH
         self.keyword = keyword
         self.count = count
-        # self.page = page
+        # self.page = page #'это вроде вообще не нужно, зачем страница
 
     def get_vacancies(self):
         list_vacancy = []
@@ -40,6 +40,9 @@ class HeadHunterAPI(API):
             experience = information.get("experience")["name"]  # требования
             description = information.get("snipppet")["requirement"]  # описание вакансии
             url = information.get("alternate_url")  # ссылка
+            # area = # проверить, там какая-то фигня с городом, цифры какие-то
+            # employment =
+            # currency = # что делать если не рубли
 
             vacancy = {
                 "name": name,
