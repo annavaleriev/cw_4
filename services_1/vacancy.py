@@ -21,13 +21,46 @@ class Vacancy:
 
     def get_vacancies_by_salary(self):
         pass
+
     # json_saver.get_vacancies_by_salary("100 000-150 000 руб.")
     # такой вывод
 
     def delete_vacancy(self):
         pass
+
     # json_saver.delete_vacancy(vacancy)
     #  у меня есть ещё методы в  class API
+
+    @staticmethod
+    def get_top_vacancy(list_vacancy, top_n):
+        """
+        Метод, который возвращается пользователю топ вакансий
+        :param list_vacancy:
+        :param top_n:
+        :return:
+        """
+        return list_vacancy[:top_n]
+    # list_vacancy - это  в классах сайтов, а top_n должен ввести пользовтаель где-то
+
+    def get_sorted_vacancy_salary(self, list_vacancy):
+        """
+        Снвчвла большая зарплата
+        :param list_vacancy:
+        :return:
+        """
+
+        list_vacancy.sort(key=lambda vacancy: vacancy.salary_from, reverse=True)
+        list_vacancy.sort(key=lambda vacancy: vacancy.salary_to, reverse=True)
+        # list_vacancy.sort(key=lambda vacancy: vacancy.currency, reverse=True)
+
+        # а если нет зп?
+
+    # def sort_operations(self, executed_operations: list[dict]) -> list[dict]:
+    #     """
+    #      сортирует список операций по дате
+    #     :return: список операций "EXECUTED" отсортированный с конца
+    #     """
+    #     return sorted(executed_operations, key=lambda operation: operation.get("date"), reverse=True)
 
     def __gt__(self, other):  # True False наверное возвращает
         """
@@ -61,3 +94,8 @@ class Vacancy:
                 f"{self.currency}\n\n"
                 f"******************************************************************\n\n"
                 )
+
+    def __repr__(self):
+        pass
+
+
