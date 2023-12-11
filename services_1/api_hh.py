@@ -9,7 +9,7 @@ class HeadHunterAPI(API):
     Класс для получения вакансий с сайта HeadHunter
     """
 
-    def __init__(self, keyword): # а зачем мне коунт? тогда его нужно вводить
+    def __init__(self, keyword):
         self.url = URL_HH
         self.keyword = keyword
 
@@ -19,8 +19,8 @@ class HeadHunterAPI(API):
             "per_page": 100,
             "page": page
         }
-        dhdhhd = requests.get(self.url, params).json()
-        return dhdhhd
+        response = requests.get(self.url, params).json()
+        return response
 
     def get_count_pages(self):
         params = {
@@ -41,46 +41,6 @@ class HeadHunterAPI(API):
         return all_vacancies
 
 
-
-
 test = HeadHunterAPI("эскорт")
-test.get_all_vacancies()
-print()
-
-        #
-        # for information in response["item"]:
-        #     name = information.get("name")  # название вакансии
-        #     salary = information.get("salary")  # ззарплата
-        #     if salary is None:
-        #         salary_from = 0
-        #         salary_to = 0
-        #     else:
-        #         salary_from = salary.get("from")
-        #         if salary_from is None:
-        #             salary_from = 0
-        #         salary_to = salary.get("to")
-        #         if salary_to is None:
-        #             salary_to = 0
-        #
-        #     experience = information.get("experience")["name"]  # требования
-        #     description = information.get("snipppet")["requirement"]  # описание вакансии
-        #     url = information.get("alternate_url")  # ссылка
-        #     # area = # проверить, там какая-то фигня с городом, цифры какие-то
-        #     # employment =
-        #     # currency = # что делать если не рубли
-        #
-        #     vacancy = {
-        #         "name": name,
-        #         "salary_from": salary_from,
-        #         "salary_to": salary_to,
-        #         "experience ": experience,
-        #         "description": description,
-        #         "url": url
-        #     }
-        #
-        #     list_vacancy.append(vacancy)
-        # return list_vacancy
-
-        # # self.area = area
-        # # self.employment = employment  # тип занятости
-        # self.currency = currency
+print(test.get_all_vacancies())
+# print()

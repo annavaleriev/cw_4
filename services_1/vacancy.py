@@ -97,5 +97,3 @@ class Vacancy:
 
     def __repr__(self):
         pass
-
-
