@@ -7,23 +7,17 @@ class API(ABC):
     """
 
     @abstractmethod
-    def get_vacancies_by_page(self):
+    def get_vacancies_by_page(self, page):
         """
         Абстрактный метод для получения вакансий по API
         :return:
         """
         pass
 
-    # def add_vacancy(self):
-    #     """
-    #     Абстрактный метод для добавления вакансий
-    #     :return:
-    #     """
-    #     pass
-    #
-    # def select_vacancy(self):
-    #     """
-    #     Абстрактный метод для выбора вакансий
-    #     :return:
-    #     """
-    #     pass
+    @abstractmethod
+    def get_count_pages(self):
+        pass
+
+    @abstractmethod
+    def get_all_vacancies(self):
+        pass
