@@ -10,37 +10,41 @@ class HeadHunterAPI(API):
     """
 
     def __init__(self, keyword):
-        self.url = URL_HH
-        self.keyword = keyword
-
-    def get_vacancies_by_page(self, page=0):
-        params = {
-            "text": self.keyword,
-            "per_page": 100,
-            "page": page
-        }
-        response = requests.get(self.url, params).json()
-        return response
-
-    def get_count_pages(self):
-        params = {
-            "text": self.keyword,
+        self.__url = URL_HH
+        self.__keyword = keyword
+        self.params = {
+            "text": self.__keyword,
             "per_page": 100,
             "page": 0
         }
-        response = requests.get(self.url, params).json()
-        pages = response["pages"]
+
+    @property
+    def url(self):
+        return self.__url
+
+    @property
+    def keyword(self):
+        return self.__keyword
+
+    def get_response(self):
+        return requests.get(self.__url, self.params).json()
+
+    def get_vacancies_by_page(self):
+        return self.get_response()
+
+    def get_count_pages(self):
+        pages = self.get_response()["pages"]
         return pages
 
     def get_all_vacancies(self):
         pages = self.get_count_pages()
         all_vacancies = []
         for page in range(pages):
-            vacancies_by_page = self.get_vacancies_by_page(page)["items"]
+            vacancies_by_page = self.get_vacancies_by_page()["items"]
             all_vacancies.extend(vacancies_by_page)
         return all_vacancies
 
 
-test = HeadHunterAPI("эскорт")
+test = HeadHunterAPI("пупс")
 print(test.get_all_vacancies())
 # print()
