@@ -7,11 +7,11 @@ class API(ABC):
     """
 
     @abstractmethod
-    def get_vacancies_by_page(self, page):
-        """
-        Абстрактный метод для получения вакансий по API
-        :return:
-        """
+    def get_response(self):
+        pass
+
+    @abstractmethod
+    def get_vacancies_by_page(self):
         pass
 
     @abstractmethod
