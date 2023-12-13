@@ -1,5 +1,5 @@
-from services_1.api_hh import HeadHunterAPI
-from services_1.api_sj import SuperJobAPI
+from services.api_hh import HeadHunterAPI
+from services.api_sj import SuperJobAPI
 
 
 def user_input():
@@ -10,6 +10,5 @@ def user_input():
     superjob_vacancy = SuperJobAPI(keyword, count)
 
     print(" ")
-
 
 
