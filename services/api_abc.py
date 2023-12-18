@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 
 class API(ABC):
@@ -16,7 +17,7 @@ class API(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get_response_by_page(self, page):
+    def get_response_by_page(self, page: int) -> dict[str, Any]:
         """
         Метод для получения вакансия с API
         :param page: номер страницы для получения данных
@@ -25,7 +26,7 @@ class API(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get_all_vacancies(self):
+    def get_all_vacancies(self) -> dict[str, Any]:
         """
         Метод, для получения списка вакансий по всем страницам
         :return: список со словарями по всем найденным вакансиям
