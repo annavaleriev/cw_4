@@ -21,6 +21,7 @@ class HeadHunterAPI(API):
     def get_response_by_page(self, page=0) -> dict[str, Any]:
         """
         Метод для получения вакансия с сайта HeadHunter
+        :param page: номер страницы для получения данных
         :return: словарь со списком вакансий в формате json
         """
         params: dict[str, Any] = {
