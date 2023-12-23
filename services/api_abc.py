@@ -8,12 +8,16 @@ class API(ABC):
     """
 
     @abstractmethod
-    def __init__(self, keyword: str):
+    def __init__(self, keyword: str) -> None:
         self.__keyword: str = keyword
 
     @property
     @abstractmethod
-    def url(self):
+    def url(self) -> str:
+        """
+        Property для url
+        :return: url в виде строки
+        """
         raise NotImplementedError
 
     @abstractmethod
