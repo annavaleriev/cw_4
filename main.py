@@ -13,6 +13,8 @@ def user_interaction():
     print("\nТеперь напишите ключевое слово для поиска вакансий: ")
     keyword = input().lower()
 
+    print("\nПожалуйста, подождите, мы ищем для вас вакансии.")
+
     if platform in (1, 3):
         hh_api = HeadHunterAPI(keyword)
         hh_vacancies = hh_api.get_all_vacancies()
