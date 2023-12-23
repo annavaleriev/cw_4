@@ -11,11 +11,22 @@ class SuperJobAPI(API):
     Класс для получения вакансий с сайта SuperJob
     """
 
-    def __init__(self, keyword: str):
+    def __init__(self, keyword: str) -> None:
         self.__keyword: str = keyword
+        self.__headers: dict = {"X-Api-App-Id": SJ_API_KEY}
+        self.__params: dict = {
+            "keyword": self.__keyword,
+            "count": COUNT_VACANCIES_BY_PAGE,
+            "page": 0,
+            "town": 4 # TODO: потом город убрать
+        }
 
     @property
-    def url(self):
+    def url(self) -> str:
+        """
+        Property для url
+        :return: url в виде строки
+        """
         return URL_SJ
 
     def get_response_by_page(self, page: int = 0) -> dict[str, Any]:
@@ -24,32 +35,8 @@ class SuperJobAPI(API):
         :param page: номер страницы для получения данных
         :return: словарь со списком вакансий в формате json
         """
-        headers: dict = {"X-Api-App-Id": SJ_API_KEY}  # method_name
-        params: dict[str, Any] = {
-            "keyword": self.__keyword,
-            "count": COUNT_VACANCIES_BY_PAGE,
-            "page": page,
-            "town": 4
-        }
-        return requests.get(self.url, params, headers=headers).json()
-
-    # def get_all_vacancies(self) -> list[dict]:
-    #     """
-    #     Метод, для получения списка вакансий по нужным критериям
-    #     :return: список со словарями по всем найденным вакансиям
-    #     """
-    #     all_vacancies: list = []  # создаем пустой список, туда запишем потом словари с вакансиями
-    #     response: dict[str, Any] = self.get_response_by_page() # получаем вакансии с сатй с указанной страницы,
-    #     в нашем случае с 0
-    #     all_vacancies.extend(response["objects"]) # добавляет найденные словари( 1 словарь = 1 вакансия) в список
-    #     # с вакансиями. Всего 100 шт с одной страницы
-    #     # all_vacancies.extend(self.get_response_by_page()["objects"])
-    #     page: int = 1 # принудительно делаем страницу 1, чтобы с неё пошел отсчет дальше
-    #     while response["more"]:
-    #         response = self.get_response_by_page(page)
-    #         all_vacancies.extend(response["objects"])
-    #         page += 1
-    #     return all_vacancies
+        self.__params["page"]: dict = page
+        return requests.get(self.url, self.__params, headers=self.__headers).json()
 
     def get_all_vacancies(self) -> list[dict]:
         """
@@ -57,7 +44,7 @@ class SuperJobAPI(API):
         :return: список со словарями по всем найденным вакансиям
         """
         all_vacancies: list = []
-        page: int = 0  # как избавится от того, чтобы говорить, что страница 0
+        page: int = 0
         while True:
             response = self.get_response_by_page(page)
             all_vacancies.extend(response["objects"])
@@ -66,7 +53,6 @@ class SuperJobAPI(API):
             page += 1
         return all_vacancies
 
-
-test = SuperJobAPI("менеджер")
-uuu = test.get_all_vacancies()
-print(uuu)
+# test = SuperJobAPI("менеджер")
+# # uuu = test.get_all_vacancies()
+# # print(uuu)

@@ -11,11 +11,15 @@ class HeadHunterAPI(API):
     Класс для получения вакансий с сайта HeadHunter
     """
 
-    def __init__(self, keyword: str):
+    def __init__(self, keyword: str) -> None:
         self.__keyword: str = keyword
 
     @property
-    def url(self):
+    def url(self) -> str:
+        """
+        Property для url
+        :return: url в виде строки
+        """
         return URL_HH
 
     def get_response_by_page(self, page=0) -> dict[str, Any]:
@@ -46,11 +50,11 @@ class HeadHunterAPI(API):
         pages: int = self.get_count_pages()
         all_vacancies: list = []
         for page in range(pages):
-            vacancies_by_page = self.get_response_by_page(page)["items"]
+            vacancies_by_page: list[dict] = self.get_response_by_page(page)["items"]
             all_vacancies.extend(vacancies_by_page)
         return all_vacancies
+
 
 # test = HeadHunterAPI("молоток")
 # print(test.get_all_vacancies())
 # # print()
-
