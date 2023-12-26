@@ -6,7 +6,8 @@ class JSONSave:
     Класс для работы с файлами json
     """
 
-    def json_saver(self, filename, all_vacancies) -> None:
+    @staticmethod
+    def json_saver(filename, all_vacancies) -> None:
         """
         Метод, который записывает в файл вакансии
         :param filename:                          # забыла что тут
