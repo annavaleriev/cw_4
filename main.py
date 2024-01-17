@@ -9,7 +9,7 @@ def user_interaction():
     json_save = WorkWithJson()
     print(
         "Добро пожаловать в приложение, которое поможет тебе найти вакансии.\n\n"
-        "Вы хотите получить с сайтов или работать с сохраненными?\n"
+        "Вы хотите получить с сайтов или работать с сохраненными ранее вакансиями?\n"
         "1 - получить с сайтов\n"
         "2 - работать с сохраненными\n")
     while True:
@@ -25,7 +25,7 @@ def user_interaction():
             print("Вы ввели слово. Вам нужно выбрать число от 1 до 2.\n")
     if platform == 1:
 
-        print ( "Выберите сайт, с которого хотите получить вакансии:\n1 - HeadHunter\n2 - Superjob\n3 - оба сайта\n")
+        print("Выберите сайт, с которого хотите получить вакансии:\n1 - HeadHunter\n2 - Superjob\n3 - оба сайта\n")
 
         while True:
             try:
@@ -92,7 +92,6 @@ def user_interaction():
 
         for vacancy in vacancies:
             combined_vacancies.append(Vacancy(**vacancy))
-
 
         print("Вы хотите отсортировать вакансии по зарплате. Напишите Да или Нет")
         need_sorted_by_salary = input().lower()

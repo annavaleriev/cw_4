@@ -1,4 +1,5 @@
 import json
+import os
 
 
 class WorkWithJson:
@@ -27,3 +28,11 @@ class WorkWithJson:
             data = json.load(file)
         return data
 
+    @staticmethod
+    def json_delete(filename) -> None:
+        """
+        Метод, который удаляет файл
+        :param filename: название файла
+        :return: None
+        """
+        os.remove(filename)
