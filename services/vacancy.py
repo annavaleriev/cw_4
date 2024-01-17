@@ -82,7 +82,7 @@ class Vacancy:
         """
         return (self.salary_from + self.salary_to) / 2
 
-    def save_vacancy_to_dict(self) -> dict:
+    def to_dict(self) -> dict:
         """
         Метод, который возвращает словарь с данными по вакансии
         :return: cловарь с данными по вакансии
