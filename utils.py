@@ -67,7 +67,7 @@ def get_vacancy_sj(all_vacancies: list[dict]) -> list[Vacancy]:
     return list_vacancy
 
 
-def get_sorted_vacancies_by_salary(list_vacancies: list[dict]) -> list[dict]:
+def get_sorted_vacancies_by_salary(list_vacancies: list[Vacancy]):
     """
     Метод, который сортирует вакансии по зарплате
     :param list_vacancies: список с вакансиями
@@ -77,7 +77,7 @@ def get_sorted_vacancies_by_salary(list_vacancies: list[dict]) -> list[dict]:
     return list_vacancies
 
 
-def get_filtered_vacancies_by_town(list_vacancies: list[dict], town: str) -> list[dict]:
+def get_filtered_vacancies_by_town(list_vacancies: list[dict], town: str):
     """
     Метод, который фильтрует вакансии по городу
     :param list_vacancies:
