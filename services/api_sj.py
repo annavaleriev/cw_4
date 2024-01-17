@@ -18,7 +18,7 @@ class SuperJobAPI(API):
             "keyword": self.__keyword,
             "count": COUNT_VACANCIES_BY_PAGE,
             "page": 0,
-            "town": 4 # TODO: потом город убрать
+            # "town": 4 # TODO: потом город убрать
         }
 
     @property
@@ -38,6 +38,21 @@ class SuperJobAPI(API):
         self.__params["page"]: dict = page
         return requests.get(self.url, self.__params, headers=self.__headers).json()
 
+    # def get_all_vacancies(self) -> list[dict]:
+    #     """
+    #     Метод, для получения списка вакансий по нужным критериям
+    #     :return: список со словарями по всем найденным вакансиям
+    #     """
+    #     all_vacancies: list = []
+    #     page: int = 0
+    #     while True:
+    #         response = self.get_response_by_page(page)
+    #         all_vacancies.extend(response["objects"])
+    #         if not response["more"]:
+    #             break
+    #         page += 1
+    #     return all_vacancies
+
     def get_all_vacancies(self) -> list[dict]:
         """
         Метод, для получения списка вакансий по нужным критериям
@@ -51,6 +66,9 @@ class SuperJobAPI(API):
             if not response["more"]:
                 break
             page += 1
+        # if not all_vacancies:
+        #     print("По данному запросу вакансий не найдено  на сайте SuperJob")
+        #     return all_vacancies
         return all_vacancies
 
 # test = SuperJobAPI("менеджер")

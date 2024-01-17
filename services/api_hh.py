@@ -31,7 +31,7 @@ class HeadHunterAPI(API):
         params: dict[str, Any] = {
             "text": self.__keyword,
             "per_page": COUNT_VACANCIES_BY_PAGE,
-            "page": page
+            "page": page,
         }
         return requests.get(self.url, params).json()
 
