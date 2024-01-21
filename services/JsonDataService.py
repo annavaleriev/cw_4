@@ -27,7 +27,7 @@ class JsonDataService:
             data = json.load(file)
         return data
 
-    def json_delete(self) -> None:
+    def delete(self) -> None:
         """
         Метод, который удаляет файл
         :return: None

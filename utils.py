@@ -76,7 +76,7 @@ def get_sorted_vacancies_by_salary(list_vacancies: list[Vacancy]):
 def get_filtered_vacancies_by_town(list_vacancies: list[dict], town: str):
     """
     Метод, который фильтрует вакансии по городу
-    :param list_vacancies:
+    :param list_vacancies: список с вакансиями
     :param town: город
     :return: список с отфильтрованными вакансиями по городу
     """
@@ -84,9 +84,15 @@ def get_filtered_vacancies_by_town(list_vacancies: list[dict], town: str):
 
 
 def validate_input(valid_numbers: tuple, choice_text: str):
+    """
+    Метод, который проверяет введенное пользователем число
+    :param valid_numbers: варианты ввода цифры пользователем
+    :param choice_text: текст, который выводится пользователю при некорректном вводе
+    :return: число, которое ввел пользователь или текст, который выводится пользователю при некорректном вводе
+    """
     while True:
         try:
-            user_input = int(input("Введите цифру: "))
+            user_input: int = int(input("Введите цифру: "))
             if user_input in valid_numbers:
                 return user_input
             print(choice_text)
@@ -95,5 +101,10 @@ def validate_input(valid_numbers: tuple, choice_text: str):
 
 
 def show_vacancies_info(combined_vacancies: list[Vacancy]):
+    """
+    Метод, который выводит информацию о вакансиях
+    :param combined_vacancies: список с экземплярами класса Vacancy
+    :return: выводит информацию о вакансии
+    """
     for vacancy in combined_vacancies:
         print(vacancy)
