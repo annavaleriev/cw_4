@@ -12,10 +12,6 @@ def validate_field(field: dict, sub_field: str, default_returning_value):
         return default_returning_value
     return field[sub_field]
 
-    # if isinstance(field, dict) and field.get(sub_field) is None:
-    #     return field[sub_field]
-    # return default_returning_value
-
 
 def get_vacancy_hh(all_vacancies: list[dict]) -> list[Vacancy]:
     """
@@ -86,3 +82,18 @@ def get_filtered_vacancies_by_town(list_vacancies: list[dict], town: str):
     """
     return list(filter(lambda vacancy: town in vacancy.area.lower(), list_vacancies))
 
+
+def validate_input(valid_numbers: tuple, choice_text: str):
+    while True:
+        try:
+            user_input = int(input("Введите цифру: "))
+            if user_input in valid_numbers:
+                return user_input
+            print(choice_text)
+        except ValueError:
+            print(f"Вы ввели слово. Вам нужно выбрать число от {min(valid_numbers)} до {max(valid_numbers)}.\n")
+
+
+def show_vacancies_info(combined_vacancies: list[Vacancy]):
+    for vacancy in combined_vacancies:
+        print(vacancy)
