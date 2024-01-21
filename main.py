@@ -2,23 +2,8 @@ from services.JSONSaver import WorkWithJson
 from services.api_hh import HeadHunterAPI
 from services.api_sj import SuperJobAPI
 from services.vacancy import Vacancy
-from utils import get_vacancy_hh, get_vacancy_sj, get_sorted_vacancies_by_salary, get_filtered_vacancies_by_town
-
-
-def validate_input(valid_numbers: tuple, choice_text: str):
-    while True:
-        try:
-            user_input = int(input("Введите цифру: "))
-            if user_input in valid_numbers:
-                return user_input
-            print(choice_text)
-        except ValueError:
-            print(f"Вы ввели слово. Вам нужно выбрать число от {min(valid_numbers)} до {max(valid_numbers)}.\n")
-
-
-def show_vacancies_info(combined_vacancies: list[Vacancy]):
-    for vacancy in combined_vacancies:
-        print(vacancy)
+from utils import get_vacancy_hh, get_vacancy_sj, get_sorted_vacancies_by_salary, get_filtered_vacancies_by_town, \
+    validate_input, show_vacancies_info
 
 
 def user_interaction():
@@ -60,17 +45,6 @@ def user_interaction():
             sj_vacancies = sjb_api.get_all_vacancies()
             print("Получено вакансий с SuperJob по всей России", len(sj_vacancies), "\n")
             list_vacancies_sj = get_vacancy_sj(sj_vacancies)
-            # if not list_vacancies_sj:
-            #     print("По данному запросу вакансий не найдено")
-            # else:
-            #     print("Получено вакансий с SuperJob по всей России", len(sj_vacancies), "\n")
-            #     list_vacancies_sj = get_vacancy_sj(sj_vacancies)
-            # if isinstance(list_vacancies_sj, str):
-            #     print(list_vacancies_sj)
-            # if not list_vacancies_sj:
-            #     print("По данному запросу вакансий не найдено")
-
-            # print(test_sj)
 
         combined_vacancies = list_vacancies_hh + list_vacancies_sj
         if not combined_vacancies:
@@ -107,27 +81,5 @@ def user_interaction():
 
         show_vacancies_info(combined_vacancies)
 
-        # hh_vacancy = Vacancy
-        # hh_exemplars = hh_vacancy.get_exemplars_hh(hh_vacancies)
-        # # hh_exemplars = Vacancy.get_exemplars_hh(hh_vacancies)
-        # for vacancy in hh_exemplars: # идём по списку с экземплярами и выводим
-        #     print(str(vacancy))
-
-
-# elif platform in (2, 3):
-#     superjob_api = SuperJobAPI(keyword)
-#     superjob_vacancies = superjob_api.get_all_vacancies()
-#     # sj_exemplars = Vacancy.get_exemplars_sj(superjob_vacancies)
-# else:
-#     print("Вы ввели неверную цифру. Вам нужно выбрать один из вариантов ниже.\n"
-#           "Выберите сайт, с которого хотите получить вакансии:\n1 - HH\n2 - SJ\n3 - оба сайта")
-#     return
-
-# json_save = JSONSave()
-# # json_save.json_saver("вакансии.json", hh_vacancies)
-# json_save.json_saver("вакансии.json",  hh_exemplars)
-
 
 user_interaction()
-
-# all_exemplars = hh_exemplars + sj_exemplars  а это мне куда засунуть?
