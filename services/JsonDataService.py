@@ -9,7 +9,7 @@ class JsonDataService:
     def __init__(self, filename):
         self.filename = filename
 
-    def saver(self, all_vacancies) -> None:
+    def saver(self, all_vacancies: list[dict]) -> None:
         """
         Метод, который записывает в файл вакансии
         :param all_vacancies: список с вакансиями
