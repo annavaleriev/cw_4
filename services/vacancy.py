@@ -28,6 +28,7 @@ class Vacancy:
         else:
             return ""
 
+    @property
     def work_with_salary(self):
         """
         Метод, который работает с заработной платой
@@ -50,7 +51,7 @@ class Vacancy:
 
         return (f"Вакансия: {self.title}\n"
                 f"{self.url}\n"
-                f"Зарплата: {self.work_with_salary()}\n"
+                f"Зарплата: {self.work_with_salary}\n"
                 f"Тип занятости: {self.employment}\n"
                 f"Город: {self.area}\n"
                 f"Описание вакансии: {self.responsibility}\n"
@@ -99,3 +100,12 @@ class Vacancy:
             "currency": self.currency
         }
         return vacancy_dict
+
+    # @classmethod
+    # def create_fron_dict(cls, vacancy_dict: dict):
+    #     """
+    #     Метод, который создает объект Vacancy из словаря
+    #     :param vacancy_dict: словарь с данными по вакансии
+    #     :return: объект Vacancy
+    #     """
+    #     return cls(**vacancy_dict)
