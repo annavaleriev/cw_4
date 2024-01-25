@@ -12,7 +12,8 @@ class VacancyApp:
     """
     __option_choice: dict = {
         1: "получить с сайтов",
-        2: "работать с сохраненными"
+        2: "работать с сохраненными",
+        3: "удалить ранее сохраненные вакансии"
     }
 
     __job_site_choice: dict = {
@@ -100,6 +101,25 @@ class VacancyApp:
             filter_vacancies_by_town = self.filter_vacancies_by_town(sort_vacancies)
             show_vacancies_info(filter_vacancies_by_town)
 
+        elif self.platform == 3:
+            self.json_save.delete()
+            print("Вакансии удалены из файла")
+
+            # print("Вы хотите удалить все вакансии и очистить список или по заработной плате или городу?\n"
+            #       "Напишите Все или Зарплата или Город")
+            # choice: str = input().lower()
+            # if choice == "все":
+            #     self.json_save.delete()
+            #     print("Вакансии удалены из файла")
+            # elif choice == "зарплата":
+            #     combined_vacancies = self.load_saved_vacancies()
+            #     sort_vacancies = self.sort_vacancies(combined_vacancies)
+            #     self.save_and_show_vacancies(sort_vacancies)
+            # elif choice == "город":
+            #     combined_vacancies = self.load_saved_vacancies()
+            #     filter_vacancies_by_town = self.filter_vacancies_by_town(combined_vacancies)
+            #     self.save_and_show_vacancies(filter_vacancies_by_town)
+
             # combined_vacancies = self.load_saved_vacancies()
             #
             # self.sort_vacancies(combined_vacancies)
@@ -122,6 +142,35 @@ class VacancyApp:
 
         return combined_vacancies
 
+    # def load_saved_vacancies(self) -> list:
+    #     """
+    #     Метод, который загружает сохраненные вакансии
+    #     :return: список с вакансиями
+    #     """
+    #     combined_vacancies: list = []
+    #     vacancies: dict = self.json_save.read()
+    #     if len(vacancies) == 0:
+    #         print("В файле нет вакансий")
+    #
+    #     for vacancy in vacancies:  # vacancies:
+    #         combined_vacancies.append(vacancy.to_class())
+    #
+    #     return combined_vacancies
+
+    # def load_saved_vacancies(self) -> list:
+    #     """
+    #     Метод, который загружает сохраненные вакансии
+    #     :return: список с вакансиями
+    #     """
+    #     combined_vacancies: list = []
+    #     vacancies: dict = self.json_save.read()
+    #     if len(vacancies) == 0:
+    #         print("В файле нет вакансий")
+    #
+    #     for vacancy_key, vacancy_data in vacancies.items():
+    #         combined_vacancies.append(vacancy_data.to_class())
+    #
+    #     return combined_vacancies
     # def load_saved_vacancies(self, combined_vacancies) -> list:
     #     """
     #     Метод, который загружает сохраненные вакансии

@@ -101,6 +101,25 @@ class Vacancy:
         }
         return vacancy_dict
 
+    def to_class(self):
+        """
+        Метод, который возвращает объекты Vacancy
+        :return:
+        """
+
+        new_vacancy = Vacancy(
+            title=self.title,
+            salary_to=self.salary_to,
+            salary_from=self.salary_from,
+            experience=self.experience,
+            responsibility=self.responsibility,
+            url=self.url,
+            area=self.area,
+            employment=self.employment,
+            currency=self.currency
+        )
+        return new_vacancy
+
     # @classmethod
     # def create_fron_dict(cls, vacancy_dict: dict):
     #     """
@@ -109,3 +128,5 @@ class Vacancy:
     #     :return: объект Vacancy
     #     """
     #     return cls(**vacancy_dict)
+
+
