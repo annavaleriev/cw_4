@@ -1,6 +1,8 @@
 import json
 import os
 
+from services.vacancy import Vacancy
+
 
 class JsonDataService:
     """
@@ -27,9 +29,15 @@ class JsonDataService:
             data = json.load(file)
         return data
 
-    def delete(self) -> None:
+    def delete_by_salary(self, avg_salary: int) -> None:
         """
-        Метод, который удаляет файл
+        Метод, который удаляет вакансии из файла по заработной плате
         :return: None
         """
-        os.remove(self.filename)
+        vacancies = self.read()
+        vacancies_instances = [Vacancy(**vacancy) for vacancy in vacancies]
+        allowed_vacancies = list(filter(lambda vac: vac.avg_salary >= avg_salary, vacancies_instances))
+        vacancies_for_write = list(map(lambda vac: vac.to_dict(), allowed_vacancies))
+        self.saver(vacancies_for_write)
+
+
