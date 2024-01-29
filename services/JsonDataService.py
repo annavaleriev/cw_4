@@ -1,5 +1,4 @@
 import json
-import os
 
 from services.vacancy import Vacancy
 
@@ -39,5 +38,3 @@ class JsonDataService:
         allowed_vacancies = list(filter(lambda vac: vac.avg_salary >= avg_salary, vacancies_instances))
         vacancies_for_write = list(map(lambda vac: vac.to_dict(), allowed_vacancies))
         self.saver(vacancies_for_write)
-
-

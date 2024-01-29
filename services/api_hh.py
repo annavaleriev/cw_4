@@ -54,7 +54,3 @@ class HeadHunterAPI(API):
             all_vacancies.extend(vacancies_by_page)
         return all_vacancies
 
-
-# test = HeadHunterAPI("молоток")
-# print(test.get_all_vacancies())
-# # print()
