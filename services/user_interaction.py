@@ -1,6 +1,7 @@
 from services.JsonDataService import JsonDataService
 from services.api_hh import HeadHunterAPI
 from services.api_sj import SuperJobAPI
+from services.vacancy import Vacancy
 
 from utils import get_vacancy_hh, get_vacancy_sj, get_sorted_vacancies_by_salary, get_filtered_vacancies_by_town, \
     validate_input, show_vacancies_info
@@ -13,7 +14,7 @@ class VacancyApp:
     __option_choice: dict = {
         1: "получить с сайтов",
         2: "работать с сохраненными",
-        3: "удалить ранее сохраненные вакансии"
+        3: "удалить из файла ранее сохраненные вакансии по заработной плате "
     }
 
     __job_site_choice: dict = {
@@ -96,31 +97,21 @@ class VacancyApp:
             self.save_and_show_vacancies(filter_vacancies_by_town)
 
         elif self.platform == 2:
-            combined_vacancies = self.load_saved_vacancies()
-            sort_vacancies = self.sort_vacancies(combined_vacancies)
-            filter_vacancies_by_town = self.filter_vacancies_by_town(sort_vacancies)
+            all_file_vacancies = self.json_save.read()
+            if len(all_file_vacancies) == 0:
+                print("В файле нет вакансий")
+            vacancies_instances = [Vacancy(**vacancy) for vacancy in all_file_vacancies]
+            sorted_vacancies = self.sort_vacancies(vacancies_instances)
+            filter_vacancies_by_town = self.filter_vacancies_by_town(sorted_vacancies)
             show_vacancies_info(filter_vacancies_by_town)
 
         elif self.platform == 3:
-            self.json_save.delete()
-            print("Вакансии удалены из файла")
-
-
-
-    def load_saved_vacancies(self) -> list:
-        """
-        Метод, который загружает сохраненные вакансии
-        :return: список с вакансиями
-        """
-        combined_vacancies: list = []
-        vacancies: dict = self.json_save.read()
-        if len(vacancies) == 0:
-            print("В файле нет вакансий")
-
-        for vacancy in vacancies:  # vacancies:
-            combined_vacancies.append(vacancy.to_dict())
-
-        return combined_vacancies
+            while True:
+                salary = input("Введите вакансии ниже какой заработной платы хотите удалить: \n")
+                if salary.isdigit():
+                    salary = int(salary)
+                    break
+                print("Вы ввели не число")
 
     @staticmethod
     def sort_vacancies(combined_vacancies: list) -> list:
