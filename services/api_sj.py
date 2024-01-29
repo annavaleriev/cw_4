@@ -51,7 +51,3 @@ class SuperJobAPI(API):
                 break
             page += 1
         return all_vacancies
-
-# test = SuperJobAPI("менеджер")
-# # uuu = test.get_all_vacancies()
-# # print(uuu)
