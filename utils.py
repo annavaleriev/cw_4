@@ -8,7 +8,7 @@ def validate_field(field: dict, sub_field: str, default_returning_value):
     :param sub_field: название поля
     :param default_returning_value: значение по умолчанию
     """
-    if field is None or field.get(sub_field) is None:
+    if field is None or isinstance(field, dict) or field.get(sub_field) is None:
         return default_returning_value
     return field[sub_field]
 
@@ -26,7 +26,6 @@ def get_vacancy_hh(all_vacancies: list[dict]) -> list[Vacancy]:
                 title=vacancy["name"],
                 salary_from=validate_field(vacancy["salary"], "from", 0),
                 salary_to=validate_field(vacancy["salary"], "to", 0),
-                # experience=validate_field(vacancy["experience"], "name", None),
                 experience=vacancy["snippet"]["requirement"],
                 responsibility=validate_field(vacancy["snippet"], "responsibility", None),
                 url=vacancy["alternate_url"],
@@ -52,7 +51,6 @@ def get_vacancy_sj(all_vacancies: list[dict]) -> list[Vacancy]:
                 salary_from=vacancy["payment_from"],
                 salary_to=vacancy["payment_to"],
                 experience=vacancy["candidat"],
-                # responsibility=vacancy["work"],
                 responsibility=validate_field(vacancy["work"], "title", ""),
                 url=vacancy["link"],
                 area=validate_field(vacancy["town"], "title", ""),
