@@ -1,7 +1,7 @@
 from services.JsonDataService import JsonDataService
 from services.api_hh import HeadHunterAPI
 from services.api_sj import SuperJobAPI
-from services.vacancy import Vacancy
+
 from utils import get_vacancy_hh, get_vacancy_sj, get_sorted_vacancies_by_salary, get_filtered_vacancies_by_town, \
     validate_input, show_vacancies_info
 
@@ -105,27 +105,7 @@ class VacancyApp:
             self.json_save.delete()
             print("Вакансии удалены из файла")
 
-            # print("Вы хотите удалить все вакансии и очистить список или по заработной плате или городу?\n"
-            #       "Напишите Все или Зарплата или Город")
-            # choice: str = input().lower()
-            # if choice == "все":
-            #     self.json_save.delete()
-            #     print("Вакансии удалены из файла")
-            # elif choice == "зарплата":
-            #     combined_vacancies = self.load_saved_vacancies()
-            #     sort_vacancies = self.sort_vacancies(combined_vacancies)
-            #     self.save_and_show_vacancies(sort_vacancies)
-            # elif choice == "город":
-            #     combined_vacancies = self.load_saved_vacancies()
-            #     filter_vacancies_by_town = self.filter_vacancies_by_town(combined_vacancies)
-            #     self.save_and_show_vacancies(filter_vacancies_by_town)
 
-            # combined_vacancies = self.load_saved_vacancies()
-            #
-            # self.sort_vacancies(combined_vacancies)
-            # self.filter_vacancies_by_town(combined_vacancies)
-            #
-            # show_vacancies_info(combined_vacancies)
 
     def load_saved_vacancies(self) -> list:
         """
@@ -141,67 +121,6 @@ class VacancyApp:
             combined_vacancies.append(vacancy.to_dict())
 
         return combined_vacancies
-
-    # def load_saved_vacancies(self) -> list:
-    #     """
-    #     Метод, который загружает сохраненные вакансии
-    #     :return: список с вакансиями
-    #     """
-    #     combined_vacancies: list = []
-    #     vacancies: dict = self.json_save.read()
-    #     if len(vacancies) == 0:
-    #         print("В файле нет вакансий")
-    #
-    #     for vacancy in vacancies:  # vacancies:
-    #         combined_vacancies.append(vacancy.to_class())
-    #
-    #     return combined_vacancies
-
-    # def load_saved_vacancies(self) -> list:
-    #     """
-    #     Метод, который загружает сохраненные вакансии
-    #     :return: список с вакансиями
-    #     """
-    #     combined_vacancies: list = []
-    #     vacancies: dict = self.json_save.read()
-    #     if len(vacancies) == 0:
-    #         print("В файле нет вакансий")
-    #
-    #     for vacancy_key, vacancy_data in vacancies.items():
-    #         combined_vacancies.append(vacancy_data.to_class())
-    #
-    #     return combined_vacancies
-    # def load_saved_vacancies(self, combined_vacancies) -> list:
-    #     """
-    #     Метод, который загружает сохраненные вакансии
-    #     :return: список с вакансиями
-    #     """
-    #     list_combined_vacancies: list = [vacancy.to_dict() for vacancy in combined_vacancies]
-    #     vacancies: dict = self.json_save.read()
-    #     if len(vacancies) == 0:
-    #         print("В файле нет вакансий")
-    #
-    #     for vacancy in vacancies:  # vacancies
-    #         list_combined_vacancies.append(vacancy.to_dict())
-    #
-    #     return list_combined_vacancies
-    #
-    # def load_saved_vacancies(self) -> list:
-    #     """
-    #     Метод, который загружает сохраненные вакансии
-    #     :return: список с вакансиями
-    #     """
-    #     combined_vacancies: list = []
-    #     vacancies: dict = self.json_save.read()
-    #     if len(vacancies) == 0:
-    #         print("В файле нет вакансий")
-    #
-    #     for vacancy_data in vacancies:
-    #         vacancy = Vacancy.create_fron_dict(vacancy_data)
-    #         vacancy_dict = vacancy.to_dict()
-    #         combined_vacancies.append(vacancy_dict)
-    #
-    #     return combined_vacancies
 
     @staticmethod
     def sort_vacancies(combined_vacancies: list) -> list:
