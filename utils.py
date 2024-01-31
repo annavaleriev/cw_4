@@ -8,18 +8,18 @@ def validate_field(field: dict, sub_field: str, default_returning_value):
     :param sub_field: название поля
     :param default_returning_value: значение по умолчанию
     """
-    if field is None or isinstance(field, dict) or field.get(sub_field) is None:
+    if field is None or not isinstance(field, dict) or field.get(sub_field) is None:
         return default_returning_value
     return field[sub_field]
 
 
-def get_vacancy_hh(all_vacancies: list[dict]) -> list[Vacancy]:
+def get_vacancy_hh(all_vacancies: list[dict]) -> list:
     """
     Метод, который создает список объектов Vacancy на основе данных о вакансиях.
     :param all_vacancies:список со словарями с вакансиями с HeadHunter
     :return: список с экземплярами  класса Vacancy
     """
-    list_vacancy: list[Vacancy] = []
+    list_vacancy: list = []
     for vacancy in all_vacancies:
         list_vacancy.append(
             Vacancy(
