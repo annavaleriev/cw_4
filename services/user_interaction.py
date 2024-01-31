@@ -13,7 +13,7 @@ class VacancyApp:
     """
     __option_choice: dict = {
         1: "получить с сайтов",
-        2: "работать с сохраненными",
+        2: "работать с сохраненными ранее вакансиями",
         3: "удалить из файла ранее сохраненные вакансии по заработной плате "
     }
 
@@ -76,6 +76,23 @@ class VacancyApp:
         self.json_save.saver(list_combined_vacancies)
         show_vacancies_info(combined_vacancies)
 
+    def check_empty_file(self) -> None:
+        """
+        Обратотка случая, когда в файле нет вакансий
+        :return: None
+        """
+        print("В файле нет вакансий.\nПолучите сначала вакансии с сайта и выберите первый пункт меню.\n")
+        self.platform = self.get_user_choice(
+            self.__option_choice,
+            self.welcome_message,
+            self.wrong_input
+        )
+        if self.platform == 1:
+            self.platform_choice()
+        else:
+            print("Этот пункт меню недоступен, так как в файле нет вакансий")
+        return
+
     def platform_choice(self):
         """
         Метод, который выбирает способ для работы с вакансиями
@@ -99,13 +116,7 @@ class VacancyApp:
         elif self.platform == 2:
             all_file_vacancies = self.json_save.read()
             if len(all_file_vacancies) == 0:
-                print("В файле нет вакансий.\nПолучите сначала вакансии с сайта и выберите первый пункт меню.\n")
-
-                self.platform = self.get_user_choice(
-                    self.__option_choice,
-                    self.welcome_message,
-                    self.wrong_input
-                )
+                self.check_empty_file()
                 return
 
             vacancies_instances = [Vacancy(**vacancy) for vacancy in all_file_vacancies]
@@ -124,8 +135,9 @@ class VacancyApp:
             self.json_save.delete_by_salary(salary)
             all_file_vacancies = self.json_save.read()
             if len(all_file_vacancies) == 0:
-                print("В файле не осталось вакансий")
-            print("Оставшиеся вакансии после удаления\n")
+                self.check_empty_file()
+                return
+            print("Оставшиеся вакансии после удаления вакансий\n")
             vacancies_instances = [Vacancy(**vacancy) for vacancy in all_file_vacancies]
             show_vacancies_info(vacancies_instances)
 
