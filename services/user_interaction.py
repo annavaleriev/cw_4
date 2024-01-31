@@ -99,7 +99,15 @@ class VacancyApp:
         elif self.platform == 2:
             all_file_vacancies = self.json_save.read()
             if len(all_file_vacancies) == 0:
-                print("В файле нет вакансий")
+                print("В файле нет вакансий.\nПолучите сначала вакансии с сайта и выберите первый пункт меню.\n")
+
+                self.platform = self.get_user_choice(
+                    self.__option_choice,
+                    self.welcome_message,
+                    self.wrong_input
+                )
+                return
+
             vacancies_instances = [Vacancy(**vacancy) for vacancy in all_file_vacancies]
             sorted_vacancies = self.sort_vacancies(vacancies_instances)
             filter_vacancies_by_town = self.filter_vacancies_by_town(sorted_vacancies)
@@ -112,6 +120,14 @@ class VacancyApp:
                     salary = int(salary)
                     break
                 print("Вы ввели не число")
+
+            self.json_save.delete_by_salary(salary)
+            all_file_vacancies = self.json_save.read()
+            if len(all_file_vacancies) == 0:
+                print("В файле не осталось вакансий")
+            print("Оставшиеся вакансии после удаления\n")
+            vacancies_instances = [Vacancy(**vacancy) for vacancy in all_file_vacancies]
+            show_vacancies_info(vacancies_instances)
 
     @staticmethod
     def sort_vacancies(combined_vacancies: list) -> list:
