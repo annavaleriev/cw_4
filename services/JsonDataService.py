@@ -7,7 +7,7 @@ class JsonDataService:
     """
     Класс для работы с файлами json
     """
-    def __init__(self, filename):
+    def __init__(self, filename: str):
         self.filename = filename
 
     def saver(self, all_vacancies: list[dict]) -> None:
@@ -33,8 +33,8 @@ class JsonDataService:
         Метод, который удаляет вакансии из файла по заработной плате
         :return: None
         """
-        vacancies = self.read()
-        vacancies_instances = [Vacancy(**vacancy) for vacancy in vacancies]
-        allowed_vacancies = list(filter(lambda vac: vac.avg_salary >= avg_salary, vacancies_instances))
-        vacancies_for_write = list(map(lambda vac: vac.to_dict(), allowed_vacancies))
+        vacancies: dict = self.read()
+        vacancies_instances: list[Vacancy] = [Vacancy(**vacancy) for vacancy in vacancies]
+        allowed_vacancies: list[Vacancy] = list(filter(lambda vac: vac.avg_salary >= avg_salary, vacancies_instances))
+        vacancies_for_write: list[dict] = list(map(lambda vac: vac.to_dict(), allowed_vacancies))
         self.saver(vacancies_for_write)

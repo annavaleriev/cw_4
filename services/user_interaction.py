@@ -13,8 +13,8 @@ class VacancyApp:
     """
     __option_choice: dict = {
         1: "получить с сайтов",
-        2: "работать с сохраненными ранее вакансиями",
-        3: "удалить из файла ранее сохраненные вакансии по заработной плате "
+        2: "работать с сохранёнными ранее вакансиями",
+        3: "удалить из файла ранее сохранённые вакансии по заработной плате"
     }
 
     __job_site_choice: dict = {
@@ -34,6 +34,13 @@ class VacancyApp:
 
     @staticmethod
     def get_user_choice(choice_dict: dict, choice_message: str, choice_text: str) -> int:
+        """
+        Метод, который получает выбор пользователя и выдаёт нужное сообщение
+        :param choice_dict: словари с вариантами выбора
+        :param choice_message: варианты выбора сообщения
+        :param choice_text: варианты выбора текст
+        :return: циаовое число с выбором пользователя
+        """
         choice: str = "\n".join([f"{number}: {text}" for number, text in choice_dict.items()])
         print(f"{choice_message}{choice}")
         return validate_input(tuple(choice_dict.keys()), f"{choice_text}{choice}")
@@ -41,7 +48,7 @@ class VacancyApp:
     @staticmethod
     def search_vacancies(job_site: int, keyword: str) -> list:
         """
-        Метод, который получает вакансии с сайтов
+        Метод, который запускает получение вакансий с сайтов
         :param job_site: сайт, с которого нужно получить вакансии
         :param keyword: ключевое слово для поиска вакансий
         :return: список с вакансиями
@@ -93,35 +100,35 @@ class VacancyApp:
             print("Этот пункт меню недоступен, так как в файле нет вакансий")
         return
 
-    def platform_choice(self):
+    def platform_choice(self) -> None:
         """
         Метод, который выбирает способ для работы с вакансиями
-        :return:
+        :return: None
         """
         if self.platform == 1:
-            job_site = self.get_user_choice(
+            job_site: int = self.get_user_choice(
                 self.__job_site_choice,
                 self.choice_site_message,
                 self.wrong_input + self.choice_site_message
             )
-            keyword = input("\nТеперь напишите ключевое слово для поиска вакансий: ").lower()
+            keyword: str = input("\nТеперь напишите ключевое слово для поиска вакансий: ").lower()
 
             print("\nПожалуйста, подождите, мы ищем для вас вакансии. Это займет не больше минуты\n")
 
-            combined_vacancies = self.search_vacancies(job_site, keyword)
-            sort_vacancies = self.sort_vacancies(combined_vacancies)
-            filter_vacancies_by_town = self.filter_vacancies_by_town(sort_vacancies)
+            combined_vacancies: list[dict] = self.search_vacancies(job_site, keyword)
+            sort_vacancies: list[dict] = self.sort_vacancies(combined_vacancies)
+            filter_vacancies_by_town: list[Vacancy] = self.filter_vacancies_by_town(sort_vacancies)
             self.save_and_show_vacancies(filter_vacancies_by_town)
 
         elif self.platform == 2:
-            all_file_vacancies = self.json_save.read()
+            all_file_vacancies: dict = self.json_save.read()
             if len(all_file_vacancies) == 0:
                 self.check_empty_file()
                 return
 
-            vacancies_instances = [Vacancy(**vacancy) for vacancy in all_file_vacancies]
-            sorted_vacancies = self.sort_vacancies(vacancies_instances)
-            filter_vacancies_by_town = self.filter_vacancies_by_town(sorted_vacancies)
+            vacancies_instances: list[Vacancy] = [Vacancy(**vacancy) for vacancy in all_file_vacancies]
+            sorted_vacancies: list[Vacancy] = self.sort_vacancies(vacancies_instances)
+            filter_vacancies_by_town: list[Vacancy] = self.filter_vacancies_by_town(sorted_vacancies)
             show_vacancies_info(filter_vacancies_by_town)
 
         elif self.platform == 3:
@@ -133,12 +140,12 @@ class VacancyApp:
                 print("Вы ввели не число")
 
             self.json_save.delete_by_salary(salary)
-            all_file_vacancies = self.json_save.read()
+            all_file_vacancies: dict = self.json_save.read()
             if len(all_file_vacancies) == 0:
                 self.check_empty_file()
                 return
             print("Оставшиеся вакансии после удаления вакансий\n")
-            vacancies_instances = [Vacancy(**vacancy) for vacancy in all_file_vacancies]
+            vacancies_instances: list[Vacancy] = [Vacancy(**vacancy) for vacancy in all_file_vacancies]
             show_vacancies_info(vacancies_instances)
 
     @staticmethod

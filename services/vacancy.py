@@ -17,7 +17,7 @@ class Vacancy:
         self.employment = employment  # тип занятости
         self.currency = currency
 
-    def check_currency(self):
+    def check_currency(self) -> str:
         """
         Метод, который проверяет указана ли валюта
         :return: валюту для отображения
@@ -28,7 +28,7 @@ class Vacancy:
             return ""
 
     @property
-    def work_with_salary(self):
+    def work_with_salary(self) -> str:
         """
         Метод, который работает с заработной платой
         :return: заработную плату для отображения в вакансии
@@ -66,7 +66,7 @@ class Vacancy:
         """
         return self.avg_salary > other.avg_salary
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         """
         Метод, который сравнивает заработные платы какая меньше
         :param other: Другой объект типа Salary, с которым сравнивается текущий объект
@@ -75,7 +75,7 @@ class Vacancy:
         return self.avg_salary < other.avg_salary
 
     @property
-    def avg_salary(self):
+    def avg_salary(self) -> float:
         """
         Метод, который вычисляет среднюю заработную плату
         :return: cреднюю заработную плату
@@ -99,5 +99,3 @@ class Vacancy:
             "currency": self.currency
         }
         return vacancy_dict
-
-

@@ -53,4 +53,3 @@ class HeadHunterAPI(API):
             vacancies_by_page: list[dict] = self.get_response_by_page(page)["items"]
             all_vacancies.extend(vacancies_by_page)
         return all_vacancies
-
