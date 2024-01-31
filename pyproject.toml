@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "cw-4"
+version = "0.1.0"
+description = "курсовая работа 4"
+authors = ["annavaleriev"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+requests = "^2.31.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
