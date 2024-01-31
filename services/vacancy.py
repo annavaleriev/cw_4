@@ -8,7 +8,6 @@ class Vacancy:
     def __init__(self, title: str, salary_from: int, salary_to: int, experience: str,
                  responsibility: str, url: str, area: str, employment: str, currency: str):
         self.title = title
-        # self.salary = salary  # зарплата без вилки
         self.salary_to = salary_to
         self.salary_from = salary_from
         self.experience = experience  # требования
@@ -100,33 +99,5 @@ class Vacancy:
             "currency": self.currency
         }
         return vacancy_dict
-
-    def to_class(self):
-        """
-        Метод, который возвращает объекты Vacancy
-        :return:
-        """
-
-        new_vacancy = Vacancy(
-            title=self.title,
-            salary_to=self.salary_to,
-            salary_from=self.salary_from,
-            experience=self.experience,
-            responsibility=self.responsibility,
-            url=self.url,
-            area=self.area,
-            employment=self.employment,
-            currency=self.currency
-        )
-        return new_vacancy
-
-    # @classmethod
-    # def create_fron_dict(cls, vacancy_dict: dict):
-    #     """
-    #     Метод, который создает объект Vacancy из словаря
-    #     :param vacancy_dict: словарь с данными по вакансии
-    #     :return: объект Vacancy
-    #     """
-    #     return cls(**vacancy_dict)
 
 
